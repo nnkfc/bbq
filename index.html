@@ -15,13 +15,12 @@
         html, body {
             width: 100%;
             overflow-x: hidden;
-            background: #f5f7fa;
+            background: #f5f5fa;
             padding-bottom: 180px;
             transition: background 0.3s;
             scroll-behavior: smooth;
         }
 
-        /* 编辑模式背景色 */
         body.edit-order-bg {
             background: #fff4e9 !important;
         }
@@ -52,7 +51,6 @@
             padding: 8px 12px;
             border-radius: 8px;
             font-size: 13px;
-            font-weight: 500;
         }
         .edit-btn {
             position: absolute;
@@ -104,7 +102,6 @@
             gap: 6px;
             white-space: nowrap;
             font-size: 15px;
-            font-weight: 500;
             color: #e33438;
         }
         .pack-row input {
@@ -113,7 +110,6 @@
             accent-color: #e33438;
         }
 
-        /* 桌号选择器：3列网格 */
         .table-selector {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -134,7 +130,6 @@
             border-color: #e33438;
         }
 
-        /* 横向 TAB 标签栏 */
         .tab-bar {
             display: flex;
             margin: 0 10px 10px;
@@ -158,10 +153,8 @@
         .tab-item.active {
             background: #e33438;
             color: #fff;
-            border-color: #e33438;
         }
 
-        /* 固定 2 列 */
         .food-grid {
             display: none;
             grid-template-columns: repeat(2, 1fr);
@@ -173,38 +166,33 @@
             display: grid;
         }
 
-        /* 菜品卡片 */
         .food-card {
             background: #fff;
             border-radius: 12px;
             padding: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            position: relative;
             display: flex;
             flex-direction: column;
             gap: 8px;
             min-height: 120px;
+            position: relative;
         }
         .food-name {
             font-weight: 500;
             font-size: 15px;
             color: #222;
-            line-height: 1.3;
         }
         .food-price {
             color: #e33438;
             font-size: 16px;
             font-weight: bold;
         }
-
-        /* 加减器修复：不裁切 */
         .quantity {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 6px;
             margin-top: auto;
-            width: 100%;
         }
         .qty-btn {
             width: 38px;
@@ -213,7 +201,6 @@
             background: #f4f5f7;
             border-radius: 8px;
             font-size: 16px;
-            color: #333;
             flex-shrink: 0;
         }
         .qty-num {
@@ -258,47 +245,6 @@
             font-size: 14px;
         }
 
-        /* 历史订单 */
-        .history-box {
-            margin: 16px 10px;
-            background: #fff;
-            border-radius: 12px;
-            padding: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        .history-title {
-            font-weight: 600;
-            margin-bottom: 12px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 6px;
-            font-size: 15px;
-        }
-        .order-item {
-            border-bottom: 1px solid #f2f3f5;
-            padding: 12px 0;
-            font-size: 13px;
-            color: #333;
-        }
-        .order-time {
-            color: #999;
-            font-size: 12px;
-            margin-top: 4px;
-        }
-        .historyShare, .historyEdit {
-            background: #5c9ced;
-            color: #fff;
-            padding: 5px 10px;
-            font-size: 12px;
-            border-radius: 6px;
-            border: none;
-            margin-top: 8px;
-            margin-right: 6px;
-        }
-        .historyEdit { background: #ff7d32; }
-
-        /* 底部结算 */
         .total-bar {
             position: fixed;
             bottom: 0;
@@ -331,10 +277,9 @@
         .reset { background: #e6e8eb; color: #333; }
         .save { background: #e33438; color: #fff; }
         .share { background: #5c9ced; color: #fff; }
-        .export { background: #42b782; color: #fff; }
+        .export { background: #42b883; color: #fff; }
         .clearHistory { background: #ff7d32; color: #fff; }
 
-        /* 弹窗 */
         .modal {
             display: none;
             position: fixed;
@@ -351,6 +296,8 @@
             max-width: 380px;
             border-radius: 12px;
             padding: 20px;
+            max-height: 80vh;
+            overflow-y: auto;
         }
         .modal-title {
             font-weight: 600;
@@ -365,19 +312,90 @@
         }
         .btn-calc { background: #e33438; color: #fff; }
         .btn-close { background: #e6e8eb; }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .history-list-modal {
+            max-height: 50vh;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+
+        /* 历史订单样式：突出桌号、金额，按钮弱化 */
+        .order-item {
+            border-bottom: 1px solid #f0f0f0;
+            padding: 10px 0;
+            font-size: 15px;
+            color: #333;
+        }
+        .order-table {
+            font-size: 18px;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 4px;
+        }
+        .order-money {
+            font-size: 17px;
+            font-weight: bold;
+            color: #e33438;
+            margin-bottom: 4px;
+        }
+        .order-other-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+        .order-time {
+            font-size: 12px;
+            color: #999;
+            margin: 4px 0;
+        }
+        /* 按钮变小、不抢眼 */
+        .order-btns {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+        }
+        .order-btns button {
+            flex: 1;
+            padding: 5px 0;
+            font-size: 13px;
+            border: none;
+            border-radius: 4px;
+            background: #f1f1f1;
+            color: #555;
+        }
+        .order-btns .btn-edit { background: #fff0e0; color: #c87000; }
+        .order-btns .btn-share { background: #e6f0ff; color: #0066cc; }
+        .order-btns .btn-delete { background: #ffe6e6; color: #cc0000; }
+
     </style>
 </head>
 <body>
 
+<div id="toast" class="toast"></div>
+
 <div class="header">
-    <!-- 左边：历史订单按钮 -->
-    <button class="history-top-btn" onclick="goHistory()">📜 历史订单</button>
-    <h2>🍢 西玉三凉店</h2>
+    <button class="history-top-btn" onclick="openHistoryModal()">📜 历史订单</button>
+    <h2>西玉三凉店</h2>
     <button class="edit-btn" id="toggleEdit">编辑菜单</button>
 </div>
 
 <div class="order-info">
-    <!-- 桌号标题 + 打包 同行展示 -->
     <div class="order-title">
         <span>桌号信息</span>
         <label class="pack-row">
@@ -386,7 +404,6 @@
         </label>
     </div>
 
-    <!-- 桌号选择器：6个号，每行3个 -->
     <div class="table-selector">
         <button class="table-btn" onclick="selectTable(1)">1号桌</button>
         <button class="table-btn" onclick="selectTable(2)">2号桌</button>
@@ -397,7 +414,7 @@
     </div>
 
     <div class="order-row">
-        <input class="order-input" id="otherFee" placeholder="费用计算" type="text" oninput="calcOtherResult();calc();calcChange()">
+        <input class="order-input" id="otherFee" placeholder="其他费用（支持+ - * /）" type="text" oninput="calcOtherResult();calc();calcChange()">
         <input class="order-input" id="otherResult" value="0.00" disabled>
     </div>
     <div class="order-row">
@@ -406,34 +423,34 @@
     </div>
 </div>
 
-<!-- 横向 TAB -->
 <div class="tab-bar">
     <div class="tab-item active" onclick="switchTab('bbq')">🔥 烧烤</div>
     <div class="tab-item" onclick="switchTab('rice')">🍚 主食</div>
-    <div class="tab-item" onclick="switchTab('box')">📦 饮料/餐盒</div>
+    <div class="tab-item" onclick="switchTab('box')">🥤 饮料/餐盒</div>
 </div>
 
-<!-- 菜品区域 -->
 <div class="food-grid open" id="bbq"></div>
 <button class="add-item-bottom" id="add_bbq" onclick="addItem('bbq')">➕ 新增菜品</button>
 
 <div class="food-grid" id="rice"></div>
-<button class="add-item-bottom" id="add_rce" onclick="addItem('rice')">➕ 新增菜品</button>
+<button class="add-item-bottom" id="add_rice" onclick="addItem('rice')">➕ 新增菜品</button>
 
 <div class="food-grid" id="box"></div>
 <button class="add-item-bottom" id="add_box" onclick="addItem('box')">➕ 新增菜品</button>
 
-<!-- 历史订单（加ID用于跳转） -->
-<div id="historyAnchor" class="history-box">
-    <div class="history-title">
-        <span>历史订单</span>
-        <div>
-            <button class="save" onclick="openQuickModal()" style="padding:6px 10px;font-size:12px;">快捷记账</button>
-            <button class="export" onclick="exportExcel()" style="padding:6px 10px;font-size:12px;">导出Excel</button>
-            <button class="clearHistory" onclick="clearHistory()" style="padding:6px 10px;font-size:12px;">清空历史</button>
+<!-- 历史订单弹窗 -->
+<div class="modal" id="historyModal">
+    <div class="modal-content">
+        <div class="modal-title">历史订单</div>
+        <div style="display:flex;gap:8px;margin-bottom:12px;">
+            <button class="export" onclick="exportExcel()" style="padding:6px 10px;font-size:12px;flex:1;">导出Excel</button>
+            <button class="clearHistory" onclick="clearHistory()" style="padding:6px 10px;font-size:12px;flex:1;">清空历史</button>
+        </div>
+        <div class="history-list-modal" id="historyListModal"></div>
+        <div style="text-align:center;margin-top:10px;">
+            <button class="btn-close" onclick="closeHistoryModal()" style="padding:8px 20px;">关闭</button>
         </div>
     </div>
-    <div id="historyList"></div>
 </div>
 
 <div class="total-bar">
@@ -448,30 +465,7 @@
     </div>
 </div>
 
-<!-- 弹窗 -->
-<div class="modal" id="quickModal">
-    <div class="modal-content">
-        <div class="modal-title">快捷记账</div>
-        <div class="order-row">
-            <input class="order-input" id="q_table" placeholder="桌号">
-        </div>
-        <div class="order-row">
-            <input class="order-input" id="q_total" placeholder="总金额" oninput="calcQuickTotal()">
-        </div>
-        <div class="order-row">
-            <input class="order-input" id="q_paid" placeholder="实收金额" type="number" oninput="calcQuickChange()">
-        </div>
-        <div class="order-row" style="justify-content:space-between;">
-            <div>应收：<span id="q_show_total" style="color:#e33438;font-weight:bold;">0.00</span></div>
-            <div>找零：<span id="q_change" style="color:#ff7d32;font-weight:bold;">0.00</span></div>
-        </div>
-        <div class="modal-btns">
-            <button class="btn-close" onclick="closeQuickModal()">取消</button>
-            <button class="btn-calc" onclick="saveQuickOrder()">保存</button>
-        </div>
-    </div>
-</div>
-
+<!-- 编辑菜品弹窗 -->
 <div class="modal" id="editModal">
     <div class="modal-content">
         <div class="modal-title">编辑菜品</div>
@@ -492,14 +486,35 @@
 </div>
 
 <script>
-// 顶部跳转到历史订单
-function goHistory() {
-    document.getElementById('historyAnchor').scrollIntoView({ behavior: 'smooth' });
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.innerText = msg;
+    toast.style.opacity = 1;
+    setTimeout(() => { toast.style.opacity = 0; }, 1000);
 }
 
+function openHistoryModal() {
+    renderHistoryModal();
+    document.getElementById('historyModal').style.display = 'flex';
+}
+function closeHistoryModal() {
+    document.getElementById('historyModal').style.display = 'none';
+}
+
+// 删除单条订单
+function deleteOrder(index) {
+    if (!confirm("确定删除这条订单吗？")) return;
+    let history = JSON.parse(localStorage.getItem("bbqHistory") || "[]");
+    history.splice(index, 1);
+    localStorage.setItem("bbqHistory", JSON.stringify(history));
+    renderHistoryModal();
+    showToast("已删除");
+}
+
+// 你提供的完整菜单
 let defaultFood = {
     bbq: [
-	    { name: "小年糕、蟹棒", price: 1, step:1 },
+        { name: "小年糕、蟹棒", price: 1, step:1 },
         { name: "烤菜", price: 1.5, step:1 },
         { name: "鱼排、蟹排、辣子", price: 2, step:1 },
         { name: "丸子、鸡米花", price: 2.5, step:1 },
@@ -534,14 +549,9 @@ let currentEdit = { cat: "", index: 0 };
 let currentEditOrderIndex = -1;
 let currentTab = "bbq";
 
-// 分类名称映射
-let categoryMap = {
-    bbq: "烧烤",
-    rice: "主食",
-    box: "饮料/餐盒"
-};
+let categoryMap = { bbq: "烧烤", rice: "主食", box: "饮料/餐盒" };
 
-// 桌号选择
+// 桌号选择：只加高亮，不隐藏
 function selectTable(num) {
     document.querySelectorAll('.table-btn').forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');
@@ -549,35 +559,35 @@ function selectTable(num) {
 }
 window.selectedTableNum = 0;
 
-// TAB 切换
 function switchTab(cat) {
     currentTab = cat;
-    // 切换TAB高亮
     document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
     event.target.classList.add('active');
-    // 隐藏所有菜品
+
     document.querySelectorAll('.food-grid').forEach(g => g.classList.remove('open'));
-    // 显示当前分类
     document.getElementById(cat).classList.add('open');
-    // 显示对应添加按钮
-    document.querySelectorAll('.add-item-bottom').forEach(b => b.style.display = 'none');
+
+    document.querySelectorAll('.add-item-bottom').forEach(btn => btn.style.display = 'none');
     if (editMode) {
         document.getElementById('add_' + cat).style.display = "block";
     }
 }
 
-// 按价格从低到高排序
 function sortAllFoodByPrice() {
     for (let cat in food) {
         food[cat].sort((a, b) => a.price - b.price);
     }
 }
 
-// 其他费用
+// 其他费用：支持 + - * / 计算
 function calcOtherResult() {
     let val = document.getElementById("otherFee").value.trim();
     let res = 0;
-    try { res = parseFloat(eval(val)) || 0; } catch (e) {}
+    try {
+        // 只允许数字和 + - * / . ( )，防止恶意代码
+        val = val.replace(/[^0-9+\-*/.()]/g, '');
+        res = eval(val) || 0;
+    } catch (e) {}
     if (res < 0) res = 0;
     document.getElementById("otherResult").value = res.toFixed(2);
 }
@@ -597,7 +607,6 @@ function checkPaid() {
     if (val < 0) document.getElementById("paid").value = 0;
 }
 
-// 渲染菜品
 function render() {
     sortAllFoodByPrice();
     for (let cat in food) {
@@ -607,8 +616,6 @@ function render() {
             let key = item.name + "_" + index;
             let div = document.createElement("div");
             div.className = "food-card";
-            div.dataset.index = index;
-
             div.innerHTML = `
                 ${editMode ? `
                 <div class="edit-controls">
@@ -621,8 +628,7 @@ function render() {
                 <div class="quantity">
                     <button class="qty-btn" onclick="change('${key}',-${item.step || 1})">-</button>
                     <input class="qty-num" id="q_${key}" value="${qty[key] || 0}"
-                        oninput="manualChange('${key}',this.value)"
-                        onblur="manualChange('${key}',this.value)">
+                        oninput="manualChange('${key}',this.value)">
                     <button class="qty-btn" onclick="change('${key}',${item.step || 1})">+</button>
                 </div>
             `;
@@ -631,7 +637,6 @@ function render() {
     }
 }
 
-// 数量
 function manualChange(key, val) {
     let num = parseInt(val) || 0;
     if (num < 0) num = 0;
@@ -647,7 +652,6 @@ function change(key, num) {
     calc(); calcChange();
 }
 
-// 计算
 function calc() {
     let total = 0;
     for (let cat in food) {
@@ -668,51 +672,42 @@ function calcChange() {
     document.getElementById("change").innerText = change.toFixed(2);
 }
 
-// 清空
 function reset() {
     initQty(); render(); calc(); calcChange();
     document.querySelectorAll('.table-btn').forEach(btn => btn.classList.remove('active'));
     window.selectedTableNum = 0;
-    
     document.getElementById("paid").value = "";
     document.getElementById("change").innerText = "0.00";
     document.getElementById("otherFee").value = "";
     document.getElementById("otherResult").value = "0.00";
     document.getElementById("isPack").checked = false;
     currentEditOrderIndex = -1;
-
     document.getElementById("saveBtn").innerText = "保存订单";
     document.body.classList.remove("edit-order-bg");
 }
 
-// 编辑模式
 function toggleEditMode() {
     editMode = !editMode;
     document.getElementById("toggleEdit").innerText = editMode ? "退出编辑" : "编辑菜单";
-    
-    document.querySelectorAll(".add-item-bottom").forEach(btn => {
-        btn.style.display = "none";
-    });
-    if (editMode) {
-        document.getElementById('add_' + currentTab).style.display = "block";
-    }
+    document.querySelectorAll(".add-item-bottom").forEach(btn => btn.style.display = editMode ? "block" : "none");
     render();
 }
 document.getElementById("toggleEdit").onclick = toggleEditMode;
 
-// 增删改菜品
 function addItem(cat) {
-    if (!editMode) { alert("请先开启编辑菜单！"); return; }
+    if (!editMode) { showToast("请先开启编辑菜单！"); return; }
     food[cat].push({ name: "新菜品", price: 1, step: 1 });
     localStorage.setItem("customFood", JSON.stringify(food));
-    initQty(); render();
+    initQty();
+    render();
 }
 
 function delItem(cat, index) {
     if (!confirm("确定删除？")) return;
     food[cat].splice(index, 1);
     localStorage.setItem("customFood", JSON.stringify(food));
-    initQty(); render();
+    initQty();
+    render();
 }
 
 function openEditModal(cat, index) {
@@ -731,7 +726,7 @@ function saveEditItem() {
     let name = document.getElementById("editName").value.trim();
     let price = parseFloat(document.getElementById("editPrice").value) || 0;
     let step = parseInt(document.getElementById("editStep").value) || 1;
-    if (!name || price <= 0) { alert("名称和单价不能为空！"); return; }
+    if (!name || price <= 0) { showToast("名称和单价不能为空！"); return; }
     food[cat][index] = { name, price, step };
     localStorage.setItem("customFood", JSON.stringify(food));
     closeEditModal();
@@ -739,7 +734,6 @@ function saveEditItem() {
     render();
 }
 
-// 订单分享文本
 function getOrderText() {
     let table = window.selectedTableNum ? window.selectedTableNum + "号桌" : "";
     let isPack = document.getElementById("isPack").checked;
@@ -762,7 +756,7 @@ function getOrderText() {
     if (other > 0) items.push(`其他费用 +${other.toFixed(2)}`);
     if (total === 0) return null;
 
-    return `🍢 烧烤订单
+    return `🍢 西玉三凉店
 桌号：${tableText}
 ----------------
 ${items.join("\n")}
@@ -775,13 +769,12 @@ ${items.join("\n")}
 function shareOrder() {
     let text = getOrderText(); if (!text) return;
     if (navigator.share) {
-        navigator.share({title:"烧烤订单",text}).catch(()=>{});
+        navigator.share({title:"西玉三凉店订单",text}).catch(()=>{});
     } else {
-        navigator.clipboard.writeText(text).then(()=>alert("已复制到剪贴板"));
+        navigator.clipboard.writeText(text).then(()=>showToast("已复制到剪贴板"));
     }
 }
 
-// 保存订单
 function saveOrder() {
     let text = getOrderText(); if (!text) return;
     let table = window.selectedTableNum ? window.selectedTableNum + "号桌" : "";
@@ -816,40 +809,44 @@ function saveOrder() {
     if (currentEditOrderIndex >= 0) {
         history[currentEditOrderIndex] = order;
         currentEditOrderIndex = -1;
-        alert("编辑保存成功");
+        showToast("订单已更新");
     } else {
         history.unshift(order);
-        alert("保存成功");
+        showToast("订单已保存");
     }
 
     localStorage.setItem("bbqHistory", JSON.stringify(history));
-    renderHistory();
+    renderHistoryModal();
     reset();
 }
 
-// 历史订单展示
-function renderHistory() {
-    let list = document.getElementById("historyList");
+// 新版历史订单渲染：突出桌号、金额
+function renderHistoryModal() {
+    let list = document.getElementById("historyListModal");
     let history = JSON.parse(localStorage.getItem("bbqHistory") || "[]");
     list.innerHTML = "";
     history.forEach((o, i) => {
         let div = document.createElement("div");
         div.className = "order-item";
-        let itemText = o.items ? o.items.join(" ｜ ") : "快捷记账";
+        let itemText = o.items ? o.items.join(" ｜ ") : "";
         div.innerHTML = `
-            <div>桌号：${o.table}</div>
-            <div>应收：${o.total.toFixed(2)}  实收：${o.paid.toFixed(2)}  找零：${o.change.toFixed(2)}</div>
-            ${o.otherFee>0?`<div>其他：${o.otherFee.toFixed(2)}</div>`:""}
+            <div class="order-table">${o.table}</div>
+            <div class="order-money">应收：${o.total.toFixed(2)} 元</div>
+            <div class="order-other-text">
+                实收：${o.paid.toFixed(2)} ｜ 找零：${o.change.toFixed(2)}
+            </div>
             <div class="order-time">${o.time}</div>
-            <div style="font-size:12px;color:#888;margin-top:4px;">${itemText}</div>
-            <button class="historyEdit" onclick="editHistory(${i})">编辑</button>
-            <button class="historyShare" onclick="shareHistory(${i})">分享</button>
+            <div class="order-other-text" style="margin-top:4px;">${itemText}</div>
+            <div class="order-btns">
+                <button class="btn-edit" onclick="editHistory(${i})">编辑</button>
+                <button class="btn-share" onclick="shareHistory(${i})">分享</button>
+                <button class="btn-delete" onclick="deleteOrder(${i})">删除</button>
+            </div>
         `;
         list.appendChild(div);
     });
 }
 
-// 编辑历史订单
 function editHistory(index) {
     let history = JSON.parse(localStorage.getItem("bbqHistory"));
     let o = history[index];
@@ -858,10 +855,7 @@ function editHistory(index) {
     reset();
     currentEditOrderIndex = index;
 
-    if (o.savedQty) {
-        qty = {...o.savedQty};
-    }
-
+    if (o.savedQty) { qty = {...o.savedQty}; }
     document.getElementById("isPack").checked = o.isPack || false;
     let tableStr = o.table || "";
     let num = tableStr.replace("号桌","").replace("📦 打包","").trim();
@@ -879,17 +873,17 @@ function editHistory(index) {
     document.body.classList.add("edit-order-bg");
     document.getElementById("saveBtn").innerText = "更新订单";
 
+    closeHistoryModal();
     render();
     calc();
     calcChange();
-    alert("已加载订单到编辑界面，修改后点击【更新订单】即可覆盖原订单！");
+    showToast("已加载订单，可直接修改");
 }
 
-// 分享历史订单
 function shareHistory(index) {
     let o = JSON.parse(localStorage.getItem("bbqHistory"))[index];
-    let itemText = o.items ? o.items.join(" ｜ ") : "快捷记账";
-    let text = `🍢 历史订单
+    let itemText = o.items ? o.items.join(" ｜ ") : "";
+    let text = `🍢 西玉三凉店 - 历史订单
 桌号：${o.table}
 时间：${o.time}
 ----------------
@@ -900,75 +894,35 @@ ${itemText}
     if (navigator.share) {
         navigator.share({title:"历史订单",text}).catch(()=>{});
     } else {
-        navigator.clipboard.writeText(text).then(()=>alert("已复制"));
+        navigator.clipboard.writeText(text).then(()=>showToast("已复制"));
     }
 }
 
-// 导出Excel
 function exportExcel() {
     let history = JSON.parse(localStorage.getItem("bbqHistory") || "[]");
-    if (history.length === 0) { alert("暂无订单"); return; }
+    if (history.length === 0) { showToast("暂无订单"); return; }
     let csv = "时间,桌号,打包,应收,实收,找零,其他费用,菜品\n";
     history.forEach(o => {
-        let items = o.items ? o.items.join(" ｜ ") : "快捷记账";
+        let items = o.items ? o.items.join(" ｜ ") : "";
         csv += `"${o.time}","${o.table||""}","${o.isPack?"是":"否"}","${o.total.toFixed(2)}","${o.paid.toFixed(2)}","${o.change.toFixed(2)}","${o.otherFee||0}","${items}"\n`;
     });
     let a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));
-    a.download = "烧烤订单.csv";
+    a.download = "西玉三凉店订单.csv";
     a.click();
 }
 
 function clearHistory() {
     if (!confirm("确定清空所有历史订单？")) return;
     localStorage.removeItem("bbqHistory");
-    renderHistory();
-}
-
-// 快捷记账
-function openQuickModal(){
-    document.getElementById("quickModal").style.display="flex";
-}
-function closeQuickModal(){
-    document.getElementById("quickModal").style.display="none";
-}
-function calcQuickTotal(){
-    let val = document.getElementById("q_total").value.trim();
-    let total=0; try{total=eval(val)||0;}catch(e){}
-    if(total<0)total=0;
-    document.getElementById("q_show_total").innerText=total.toFixed(2);
-    calcQuickChange();
-}
-function calcQuickChange(){
-    let total=parseFloat(document.getElementById("q_show_total").innerText)||0;
-    let paid=parseFloat(document.getElementById("q_paid").value)||0;
-    let change=paid>=total?paid-total:0;
-    document.getElementById("q_change").innerText=change.toFixed(2);
-}
-function saveQuickOrder(){
-    let table = (document.getElementById("q_table").value||"").trim();
-    let total=parseFloat(document.getElementById("q_show_total").innerText)||0;
-    let paid=parseFloat(document.getElementById("q_paid").value)||0;
-    let change=parseFloat(document.getElementById("q_change").innerText)||0;
-    if(total<=0){alert("金额无效");return;}
-    let order={
-        time:new Date().toLocaleString(),
-        table,total,paid,change,
-        items:["快捷记账"]
-    };
-    let history=JSON.parse(localStorage.getItem("bbqHistory")||"[]");
-    history.unshift(order);
-    localStorage.setItem("bbqHistory",JSON.stringify(history));
-    alert("保存成功");
-    closeQuickModal();
-    renderHistory();
+    renderHistoryModal();
 }
 
 window.onload = () => {
     initQty();
     render();
     calc();
-    renderHistory();
+    renderHistoryModal();
 };
 </script>
 </body>
