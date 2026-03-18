@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>烧烤计价器</title>
+    <title>西玉三凉店</title>
     <style>
         * {
             margin: 0;
@@ -372,7 +372,7 @@
 <div class="header">
     <!-- 左边：历史订单按钮 -->
     <button class="history-top-btn" onclick="goHistory()">📜 历史订单</button>
-    <h2>🍢 烧烤计价器</h2>
+    <h2>🍢 西玉三凉店</h2>
     <button class="edit-btn" id="toggleEdit">编辑菜单</button>
 </div>
 
@@ -397,7 +397,7 @@
     </div>
 
     <div class="order-row">
-        <input class="order-input" id="otherFee" placeholder="其他费用" type="text" oninput="calcOtherResult();calc();calcChange()">
+        <input class="order-input" id="otherFee" placeholder="费用计算" type="text" oninput="calcOtherResult();calc();calcChange()">
         <input class="order-input" id="otherResult" value="0.00" disabled>
     </div>
     <div class="order-row">
@@ -408,9 +408,9 @@
 
 <!-- 横向 TAB -->
 <div class="tab-bar">
-    <div class="tab-item active" onclick="switchTab('bbq')">🔥 烧烤类</div>
-    <div class="tab-item" onclick="switchTab('rice')">🍚 主食类</div>
-    <div class="tab-item" onclick="switchTab('box')">📦 餐盒类</div>
+    <div class="tab-item active" onclick="switchTab('bbq')">🔥 烧烤</div>
+    <div class="tab-item" onclick="switchTab('rice')">🍚 主食</div>
+    <div class="tab-item" onclick="switchTab('box')">📦 饮料/餐盒</div>
 </div>
 
 <!-- 菜品区域 -->
@@ -499,20 +499,18 @@ function goHistory() {
 
 let defaultFood = {
     bbq: [
+	    { name: "小年糕、蟹棒", price: 1, step:1 },
         { name: "烤菜", price: 1.5, step:1 },
-        { name: "烤辣子", price: 2, step:1 },
-        { name: "鱼排、蟹排", price: 2, step:1 },
+        { name: "鱼排、蟹排、辣子", price: 2, step:1 },
         { name: "丸子、鸡米花", price: 2.5, step:1 },
-        { name: "肝子、肚子、板筋", price: 3, step:1 },
-        { name: "玉米肠、黄年糕", price: 3, step:1 },
-        { name: "烤肉", price: 5, step:1 },
-        { name: "薯塔、鸡蛋", price: 5, step:1 },
+        { name: "肝子、玉米肠、黄年糕", price: 3, step:1 },
+        { name: "肉、薯塔、鸡蛋", price: 5, step:1 },
         { name: "烤鱼", price: 6, step:1 },
-        { name: "烤鸡翅", price: 7, step:1 },
+        { name: "鸡翅", price: 7, step:1 },
         { name: "假腰子", price: 10, step:1 },
     ],
     rice: [
-        { name: "干饺", price: 0.8, step:1 },
+        { name: "干饺", price: 0.8, step:5 },
         { name: "三凉", price: 10, step:1 },
         { name: "哨子面", price: 12, step:1 },
         { name: "手擀粉", price: 13, step:1 },
@@ -522,7 +520,10 @@ let defaultFood = {
     ],
     box: [
         { name: "小餐盒", price: 1, step:1 },
-        { name: "大餐盒", price: 3, step:1 },
+        { name: "大餐盒、小饮料", price: 3, step:1 },
+        { name: "小木屋", price: 4, step:1 },
+        { name: "中饮料", price: 5, step:1 },
+        { name: "果粒", price: 6, step:1 },
     ]
 };
 
@@ -535,9 +536,9 @@ let currentTab = "bbq";
 
 // 分类名称映射
 let categoryMap = {
-    bbq: "烧烤类",
-    rice: "主食类",
-    box: "餐盒类"
+    bbq: "烧烤",
+    rice: "主食",
+    box: "饮料/餐盒"
 };
 
 // 桌号选择
